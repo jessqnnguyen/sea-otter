@@ -43,6 +43,10 @@
 		
 		function SaveToken($inputToken) {
 			
+			if(!is_dir($this->localDirectory))
+			{
+				mkdir($this->localDirectory);
+			}
 			$tokenFile = fopen($this->tokenFilename, "a+");
 			
 			$filesize = filesize($this->tokenFilename);
