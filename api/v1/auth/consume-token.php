@@ -25,6 +25,6 @@
 		$reply["success"] = false;
 	}
 	
-	//Allow the cross-domain flags for local testing
-	header("Access-Control-Allow-Origin: http://127.0.0.1:81");
+	//serialize the reply in json so it can be read by the client.
+	print(json_encode($reply));
 ?>
