@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<meta name="Access-Control-Allow-Origin" content="*"></meta>
+	</head>
+	<body>
+		<form id="textForm">
+			<input type="text" name="textField"/>
+			<input type="submit" value="submit text" id="testbutton"/>
+		</form>
+		
+	</body>
+	
+	<script>
+		var textForm = document.getElementById("textForm");
+	
+		
+		var text = textForm['textField'];
+		
+		textForm.onsubmit = function() {
+		
+			var request = new XMLHttpRequest();
+			
+			request.onreadystatechange = function() {
+			
+				if (request.readyState !== XMLHttpRequest.DONE) {
+					return;
+				}
+				
+				var response = request.response;
+				console.log(response);
+			}
+
+			request.open("POST","http://127.0.0.1:81/v1/blog-post/create.php");
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.send("blog-content="+text.value);
+			
+			return false;
+		}
+		
+		
+		function AddDebugElement(content) {
+		
+			var element = document.createElement("p");
+			
+			element.innerHTML = content;
+			
+			document.body.appendChild(element);
+			
+		}
+	</script>
+</html>
