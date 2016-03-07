@@ -8,12 +8,15 @@
 			<input type="submit" value="submit text" id="testbutton"/>
 		</form>
 		
+		<div id="blogPosts"></div>
 	</body>
 	
 	<script>
+
+		var blogPostsElement = document.getElementById("blogPosts");
+
 		var textForm = document.getElementById("textForm");
 	
-		
 		var text = textForm['textField'];
 		
 		textForm.onsubmit = function() {
@@ -28,6 +31,11 @@
 				
 				var response = request.response;
 				console.log(response);
+				var blogPosts = JSON.parse(response);
+				blogPostsElement.innerHTML = "";
+				blogPosts.forEach(function(element) {
+					blogPostsElement.innerHTML += element + "<br>";
+				})
 			}
 
 			request.open("POST","http://127.0.0.1:81/v1/blog-post/create.php");
