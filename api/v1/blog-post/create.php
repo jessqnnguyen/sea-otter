@@ -17,7 +17,7 @@
 
  	// Check if the new post data is non-null and is actually set.
  	if (isset($newPost)) {
- 		$post->CreatePost($newPost);
+ 		$posts->CreatePost($newPost);
  	} else {
  		print("Error: no post data.");
 		exit();

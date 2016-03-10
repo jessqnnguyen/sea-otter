@@ -1,7 +1,7 @@
 <?php
 	
 	/**
-	 * The Post class allows the client to create and delete
+	 * The Posts class allows the client to create and delete
 	 * blog posts, pushing all changes to a JSON file stored in 
 	 * the /local folder in a file called blogpostfile.json.
 	 * This is inaccessible to the web, but visible to PHP code.
@@ -9,7 +9,7 @@
 	 * of the file, and added to the scope of all files that
 	 * import this.
 	 */
-	class Post {
+	class Posts {
 		
 		// Store the location of the blog posts JSON file.
 		protected $postFilename;
@@ -96,5 +96,5 @@
 	}
 
 	// Inject an instance of the Post class into the scope.
-	$post = new Post();	
+	$posts = new Posts();	
 ?>
