@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<meta name="Access-Control-Allow-Origin" content="*"></meta>
+	</head>
+	<body>
+		<form id="textForm">
+			<input type="text" name="subjectField"/>
+			<input type="text" name="textField"/>
+			<input type="submit" value="submit text" id="testbutton"/>
+		</form>
+		
+		<div id="blogPosts"></div>
+	</body>
+	
+	<script>
+
+		var blogPostsElement = document.getElementById("blogPosts");
+
+		var textForm = document.getElementById("textForm");
+	
+		var text = textForm['textField'];
+
+		var subject = textForm['subjectField'];
+		
+		textForm.onsubmit = function() {
+		
+			var request = new XMLHttpRequest();
+			
+			request.onreadystatechange = function() {
+			
+				if (request.readyState !== XMLHttpRequest.DONE) {
+					return;
+				}
+				var response = request.response;
+				console.log(response);
+				var blogPosts = JSON.parse(response);
+				blogPostsElement.innerHTML = "";
+				blogPosts.forEach(function(element) {
+					var post = JSON.parse(element);
+					blogPostsElement.innerHTML += "<h1>Post title: " + post.subject + "</h1><br>";
+					blogPostsElement.innerHTML += "<p>Subject: " + post.text + "</p><br>";
+				})
+			}
+			var blogEntry = {
+				subject: subject.value,
+				text: text.value,
+			}
+
+			var jsonBlogEntry = JSON.stringify(blogEntry);
+
+			request.open("POST","http://127.0.0.1:81/v1/blog-post/create.php");
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			request.send("blog-content="+jsonBlogEntry);
+			
+			return false;
+		}
+		
+		
+		function AddDebugElement(content) {
+		
+			var element = document.createElement("p");
+			
+			element.innerHTML = content;
+			
+			document.body.appendChild(element);
+			
+		}
+	</script>
+</html>
